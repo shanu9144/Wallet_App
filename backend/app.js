@@ -11,7 +11,9 @@ const app = express();
 
 // CORS configuration
 app.use(cors({
-    origin: 'https://wallet-app-five-mu.vercel.app/', // Replace with your frontend URL
+    origin: 'https://wallet-app-five-mu.vercel.app', // Frontend domain
+    methods: ['GET', 'POST'],
+    allowedHeaders: ['Content-Type', 'Authorization'],
     credentials: true
 }));
 

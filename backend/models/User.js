@@ -1,21 +1,22 @@
-module.exports = (sequelize, DataTypes) => {
-    const User = sequelize.define('User', {
-        email: {
-            type: DataTypes.STRING,
-            allowNull: false,
-            unique: true,
-        },
-        password: {
-            type: DataTypes.STRING,
-            allowNull: false,
-        },
-    }, {
-        timestamps: true,
-    });
+const { DataTypes } = require('sequelize');
+const sequelize = require('../config/database');
 
-    User.associate = (models) => {
-        User.hasOne(models.Wallet, { foreignKey: 'userId' });
-    };
+const User = sequelize.define('User', {
+    email: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        unique: true,
+    },
+    password: {
+        type: DataTypes.STRING,
+        allowNull: false,
+    },
+}, {
+    timestamps: true,
+});
 
-    return User;
+User.associate = (models) => {
+    User.hasOne(models.Wallet, { foreignKey: 'userId' });
 };
+
+module.exports = User;

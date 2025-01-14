@@ -28,10 +28,16 @@ const Dashboard = () => {
                 }
             });
             setBalance(data.balance);
-            setTransactions(data.Transactions || []);
+            setTransactions(data.transactions || []); // Corrected Transactions to transactions
             setUser(data.user); // Assuming the API returns user info
         } catch (error) {
-            alert(error.response?.data?.message || 'Error fetching wallet data');
+            console.error('Error fetching wallet data:', error); // Improved error logging
+            console.error('Error details:', error.message, error.stack); // Detailed error logging
+            if (error.code === 'ERR_NETWORK') {
+                alert('Network error. Please check your connection.');
+            } else {
+                alert(error.response?.data?.message || 'Error fetching wallet data');
+            }
         } finally {
             setLoading(false);
         }
@@ -58,7 +64,13 @@ const Dashboard = () => {
             setAmount('');
             fetchWalletData();
         } catch (error) {
-            alert(error.response?.data?.message || 'Transaction failed');
+            console.error('Error processing transaction:', error); // Improved error logging
+            console.error('Error details:', error.message, error.stack); // Detailed error logging
+            if (error.code === 'ERR_NETWORK') {
+                alert('Network error. Please check your connection.');
+            } else {
+                alert(error.response?.data?.message || 'Transaction failed');
+            }
         } finally {
             setLoading(false);
         }
@@ -80,7 +92,7 @@ const Dashboard = () => {
                 {user && (
                     <div className="flex items-center">
                         <div className="w-8 h-8 rounded-full bg-gray-300 flex items-center justify-center mr-2">
-                            <span className="text-sm font-bold text-gray-700">{user.email.charAt(0).toUpperCase()}</span>
+                            <span className="text-sm font-bold text-gray-700">{user.email?.charAt(0).toUpperCase()}</span>
                         </div>
                         <p>Welcome, {user.email}</p>
                     </div>

@@ -1,18 +1,18 @@
-const { Sequelize, DataTypes } = require('sequelize');
 const sequelize = require('../config/database');
+const User = require('./User');
+const Wallet = require('./Wallet');
+const Transaction = require('./Transaction');
 
-const User = require('./User')(sequelize, DataTypes);
-const Wallet = require('./Wallet')(sequelize, DataTypes);
-const Transaction = require('./Transaction')(sequelize, DataTypes);
-
-User.hasOne(Wallet, { foreignKey: 'userId' });
-Wallet.belongsTo(User, { foreignKey: 'userId' });
-Wallet.hasMany(Transaction, { foreignKey: 'WalletId' });
-Transaction.belongsTo(Wallet, { foreignKey: 'WalletId' });
-
-module.exports = {
-    sequelize,
+const models = {
     User,
     Wallet,
     Transaction,
 };
+
+Object.keys(models).forEach((modelName) => {
+    if (models[modelName].associate) {
+        models[modelName].associate(models);
+    }
+});
+
+module.exports = models;

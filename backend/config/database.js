@@ -4,11 +4,10 @@ require('dotenv').config();
 const sequelize = new Sequelize(process.env.DB_NAME, process.env.DB_USER, process.env.DB_PASSWORD, {
     host: process.env.DB_HOST,
     dialect: 'mysql',
-    logging: false, // Disable logging
-    define: {
-        freezeTableName: true, // Prevent Sequelize from pluralizing table names
-        timestamps: true, // Enable timestamps
-    },
+    logging: false,
+    // Ensure the environment variables are correctly set
+    username: process.env.DB_USER,
+    password: process.env.DB_PASSWORD,
 });
 
 module.exports = sequelize;

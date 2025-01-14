@@ -1,5 +1,4 @@
 const express = require('express');
-const cors = require('cors');
 const { getWallet, updateBalance } = require('../controllers/walletController');
 const { authenticateToken } = require('../middlewares/authMiddleware');
 const router = express.Router();

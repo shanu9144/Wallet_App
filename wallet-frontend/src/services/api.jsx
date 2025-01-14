@@ -1,7 +1,8 @@
 import axios from 'axios';
 
 const instance = axios.create({
-    baseURL: 'https://wallet-app-fdwh.onrender.com/api',
+    baseURL: 'http://localhost:5000/api', // Ensure this matches your backend server URL
+    withCredentials: true, // Ensure credentials are sent with requests
 });
 
 instance.interceptors.request.use((config) => {
@@ -20,6 +21,7 @@ instance.interceptors.response.use(
             window.location.href = '/login';
         }
         console.error('API error:', error);
+        console.error('Error details:', error.message, error.stack); // Detailed error logging
         return Promise.reject(error);
     }
 );

@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const instance = axios.create({
-    baseURL: 'http://localhost:5000/api', // Ensure this matches your backend server URL
+    baseURL: 'https://wallet-app-fdwh.onrender.com/api', // Ensure this matches your backend server URL
     withCredentials: true, // Ensure credentials are sent with requests
 });
 

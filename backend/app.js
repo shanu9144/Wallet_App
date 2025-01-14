@@ -13,7 +13,7 @@ const app = express();
 
 // CORS configuration
 app.use(cors({
-    origin: ['https://wallet-app-five-mu.vercel.app', 'http://localhost:5173'], // Allow both production and development domains
+    origin: ['https://wallet-app-wheat.vercel.app/', 'http://localhost:5173'], // Allow both production and development domains
     methods: ['GET', 'POST'],
     allowedHeaders: ['Content-Type', 'Authorization'],
     credentials: true
